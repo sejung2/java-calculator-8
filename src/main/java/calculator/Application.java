@@ -9,9 +9,9 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String inputString = readLine();
 
-        String custom = "";
-        String regex = ",|:";
-        String[] nums;
+        String custom = ""; // 커스텀 구분자
+        String regex = ",|:"; // 기본 구분자
+        String[] nums; // 숫자 문자열 배열ㄹ
 
         // 커스텀 구분자 유무 확인
         if (inputString.startsWith("//")) {
@@ -20,7 +20,7 @@ public class Application {
             custom = inputString.substring(2, index);
             inputString = inputString.substring(index + 2);
 
-            regex = regex + "|" + "\\\\" + custom;
+            regex = regex + "|" + "\\\\" + custom; // 정규식에 커스텀 구분자 추가
 
             nums = inputString.split(regex);
             getSum(nums);
@@ -36,7 +36,7 @@ public class Application {
         try {
             for (String num : nums) {
                 if (num.isBlank() || Integer.parseInt(num) < 0) {
-                    throw new IllegalArgumentException();
+                    throw new IllegalArgumentException("잘못된 값이 입력되었습니다.");
                 }
                 sum += Integer.parseInt(num);
             }
