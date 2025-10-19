@@ -23,8 +23,28 @@ public class Application {
             regex = regex + "|" + "\\\\" + custom;
 
             nums = inputString.split(regex);
+            getSum(nums);
         } else {
             nums = inputString.split(regex);
+            System.out.println(Arrays.toString(nums));
+            getSum(nums);
         }
     }
+
+    private static void getSum(String[] nums) {
+        int sum = 0;
+        try {
+            for (String num : nums) {
+                if (num.isBlank() || Integer.parseInt(num) < 0) {
+                    throw new IllegalArgumentException();
+                }
+                sum += Integer.parseInt(num);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("숫자 이외의 값이 입력되었습니다.");
+            return;
+        }
+        System.out.println("결과 : " + sum);
+    }
+
 }
